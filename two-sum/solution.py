@@ -7,12 +7,26 @@ class Solution:
         """
 
         sorted_nums = mergesort(nums)
-        for index_a in range(len(sorted_nums)):
-            target_b = target - sorted_nums[index_a]
-            index_b = binsearch(sorted_nums, target_b)
-            if index_b != -1:
+        for sort_index_a in range(len(sorted_nums)):
+            target_b = target - sorted_nums[sort_index_a]
+            sort_index_b = binsearch(sorted_nums, target_b)
+            if sort_index_b != -1:
+                index_a = linsearch(nums, sorted_nums[sort_index_a])
+                index_b = linsearch(nums, sorted_nums[sort_index_b])
                 return [index_a, index_b]
         return [-1, -1]
+
+def linsearch(nums, target):
+    """
+    :type nums: List[int]
+    :type target: int
+    :rtype: int
+    """
+
+    for index in range(len(nums)):
+        if nums[index] == target:
+            return index
+    return -1
 
 def binsearch(nums, target):
     """
