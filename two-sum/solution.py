@@ -6,7 +6,37 @@ class Solution:
         :rtype: List[int]
         """
 
-        sortedList = mergesort(nums)
+        sorted_nums = mergesort(nums)
+        for index_a in range(len(sorted_nums)):
+            print(f"a: {index_a}")
+            target_b = target - sorted_nums[index_a]
+            print(f"target_b: {target_b}")
+            index_b = binsearch(sorted_nums, target_b)
+            print(f"index_b: {index_b}")
+            if index_b != -1:
+                return [index_a, index_b]
+        return [-1, -1]
+
+def binsearch(nums, target):
+    """
+    :type nums: List[int]
+    :type target: int
+    :rtype: int
+    """
+
+    index = len(nums) // 2
+    index_min = -1
+    index_max = len(nums)
+    while index > index_min and index < index_max:
+        if nums[index] == target:
+            return index
+        elif nums[index] > target:
+            index_max = index
+            index //= 2
+        else:
+            index_min = index
+            index = (index + len(nums)) // 2
+    return -1
 
 def mergesort(nums):
     """
@@ -26,10 +56,10 @@ def mergesort(nums):
         while index_a < len(list_a) or index_b < len(list_b):
             if index_a == len(list_a):
                 list_result += list_b[index_b:]
-                break;
+                break
             elif index_b == len(list_b):
                 list_result += list_a[index_a:]
-                break;
+                break
             elif list_a[index_a] > list_b[index_b]:
                 list_result.append(list_b[index_b])
                 index_b += 1
@@ -54,3 +84,7 @@ ulist = [1, 3, 2, 9, 5, 11, 8]
 sorted = mergesort(ulist)
 print(ulist)
 print(sorted)
+#print(binsearch(sorted, 7))
+#print(binsearch(sorted, 11))
+#print(binsearch(sorted, 1))
+print(mysoln.twoSum(ulist, 7))
