@@ -8,11 +8,8 @@ class Solution:
 
         sorted_nums = mergesort(nums)
         for index_a in range(len(sorted_nums)):
-            print(f"a: {index_a}")
             target_b = target - sorted_nums[index_a]
-            print(f"target_b: {target_b}")
             index_b = binsearch(sorted_nums, target_b)
-            print(f"index_b: {index_b}")
             if index_b != -1:
                 return [index_a, index_b]
         return [-1, -1]
@@ -78,13 +75,3 @@ def mergesort(nums):
         slist_right = mergesort(list_right)
         merged =  merge(slist_left, slist_right)
         return merged
-
-mysoln = Solution()
-ulist = [1, 3, 2, 9, 5, 11, 8]
-sorted = mergesort(ulist)
-print(ulist)
-print(sorted)
-#print(binsearch(sorted, 7))
-#print(binsearch(sorted, 11))
-#print(binsearch(sorted, 1))
-print(mysoln.twoSum(ulist, 7))
