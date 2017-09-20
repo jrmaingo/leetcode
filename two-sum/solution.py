@@ -21,15 +21,16 @@ def linsearch(nums, target_a, target_b):
     :rtype: List[int]
     """
 
-    result = []
+    index_a = index_b = -1
     for index in range(len(nums)):
-        if len(result) == 2:
-            break;
-        if nums[index] == target_a:
-            result.append(index)
-        if nums[index] == target_b and (target_a != target_b or result[0] != index):
-            result.append(index)
-    return result
+        if index_a != -1 and index_b != -1:
+            break
+        if nums[index] == target_a and index_a == -1:
+            index_a = index
+        if nums[index] == target_b and index_b == -1 and \
+            (target_a != target_b or index_a != index):
+            index_b = index
+    return [index_a, index_b]
 
 def binsearch(nums, target):
     """
