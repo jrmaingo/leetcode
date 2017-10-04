@@ -47,10 +47,9 @@ def binsearch(nums, target):
             return index
         elif nums[index] > target:
             index_max = index
-            index //= 2
         else:
             index_min = index
-            index = (index + len(nums)) // 2
+        index = (index_max - index_min) // 2 + index_min
     return -1
 
 def mergesort(nums):
